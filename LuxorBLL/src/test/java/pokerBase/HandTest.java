@@ -260,8 +260,6 @@ public class HandTest {
 		}		
 		
 		
-		
-		
 		int iActualIsHandFivefAKind = h.getHandScore().getHandStrength();
 		int iExpectedIsHandFiveOfAKind = eHandStrength.FiveOfAKind.getHandStrength();
 		
@@ -923,6 +921,69 @@ public class HandTest {
 	}		
 	
 	@Test
+	public void TestNaturalRoyalFlush() {
+		
+		HandScore hs = new HandScore();
+		
+		ArrayList<Card> NatRoyalFlush = new ArrayList<Card>();
+		NatRoyalFlush.add(new Card(eSuit.CLUBS,eRank.TEN,0));
+		NatRoyalFlush.add(new Card(eSuit.CLUBS,eRank.JACK,0));
+		NatRoyalFlush.add(new Card(eSuit.CLUBS,eRank.QUEEN,0));		
+		NatRoyalFlush.add(new Card(eSuit.CLUBS,eRank.KING,0));
+		NatRoyalFlush.add(new Card(eSuit.CLUBS,eRank.ACE,0));
+		Collections.sort(NatRoyalFlush);
+		Hand h = new Hand();
+		h = SetHand(NatRoyalFlush,h);
+		
+		ArrayList<Card> RoyalFlush = new ArrayList<Card>();
+		RoyalFlush.add(new Card(eSuit.CLUBS,eRank.TEN,0));
+		RoyalFlush.add(new Card(eSuit.CLUBS,eRank.JACK,0));
+		RoyalFlush.add(new Card(eSuit.CLUBS,eRank.QUEEN,0));		
+		RoyalFlush.add(new Card(eSuit.CLUBS,eRank.KING,0));
+		RoyalFlush.add(new Card(eSuit.JOKER,eRank.JOKER,0));
+		Collections.sort(RoyalFlush);
+		Hand h2 = new Hand();
+		h2 = SetHand(RoyalFlush,h);
+		
+		boolean bActualIsNatRoyalFlush = Hand.isHandNaturalRoyalFlush(h, hs);
+		boolean bExpectedIsNatRoyalFlush = true;
+		boolean bNotNaturalRF = Hand.isHandNaturalRoyalFlush(h2, hs);
+		
+		assertEquals(bExpectedIsNatRoyalFlush,bActualIsNatRoyalFlush);	
+		assertFalse(bExpectedIsNatRoyalFlush == bNotNaturalRF);
+		
+		assertEquals(hs.getHiHand(),eRank.ACE.getiRankNbr());	
+	}
+	
+	@Test
+	public void TestNaturalRoyalFlushEval() {
+		
+		HandScore hs = new HandScore();
+		ArrayList<Card> RoyalFlush = new ArrayList<Card>();
+		RoyalFlush.add(new Card(eSuit.CLUBS,eRank.TEN,0));
+		RoyalFlush.add(new Card(eSuit.CLUBS,eRank.JACK,0));
+		RoyalFlush.add(new Card(eSuit.CLUBS,eRank.QUEEN,0));		
+		RoyalFlush.add(new Card(eSuit.CLUBS,eRank.KING,0));
+		RoyalFlush.add(new Card(eSuit.CLUBS,eRank.ACE,0));
+		Collections.sort(RoyalFlush);
+		Hand h = new Hand();
+		h = SetHand(RoyalFlush,h);
+		
+		try {
+			h = Hand.EvaluateHand(h);
+		} catch (HandException e) {			
+			e.printStackTrace();
+			fail("TestStraightEval failed");
+		}		
+
+		int iActualIsHandRoyalFlush = h.getHandScore().getHandStrength();
+		int iExpectedIsHandRoyalFlush = eHandStrength.RoyalFlush.getHandStrength();
+		
+		assertEquals(iActualIsHandRoyalFlush,iExpectedIsHandRoyalFlush);		
+		assertEquals(h.getHandScore().getHiHand(),eRank.ACE.getiRankNbr());		
+	}
+	
+	@Test
 	public void TestRoyalFlush() {
 		
 		HandScore hs = new HandScore();
@@ -1280,4 +1341,30 @@ public class HandTest {
 		}
 		
 	}
-}
+	
+/*	@Test
+	public void TestEvalHandFiveOfAKind(){
+		HandScore hs = new HandScore();
+		ArrayList<Card> FiveOfAKind = new ArrayList<Card>();
+		FiveOfAKind.add(new Card(eSuit.CLUBS,eRank.ACE,0));
+		FiveOfAKind.add(new Card(eSuit.CLUBS,eRank.ACE,0));
+		FiveOfAKind.add(new Card(eSuit.CLUBS,eRank.ACE,0));		
+		FiveOfAKind.add(new Card(eSuit.CLUBS,eRank.ACE,0));
+		FiveOfAKind.add(new Card(eSuit.CLUBS,eRank.ACE,0));
+		
+		Hand h = new Hand();
+		h = SetHand(FiveOfAKind,h);
+		
+		int ExpectedHandScore = eHandStrength.FiveOfAKind.getHandStrength();
+		int ActualHandScore = Hand.EvalHand(h);
+		
+		assertEquals(ExpectedHandScore, ActualHandScore);
+		
+		FINISH J UNIT TESTS LATER
+		
+	}*/
+		
+		
+		//HandList.add(new Hand())
+	}
+

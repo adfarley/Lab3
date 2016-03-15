@@ -14,7 +14,7 @@ import pokerEnums.eSuit;
  */
 public class Deck {
 
-	/**
+	/** 
 	 * 
 	 */
 	private ArrayList<Card> deckCards = new ArrayList<Card>();
@@ -80,4 +80,9 @@ public class Deck {
 	{
 		return deckCards.size();	
 	}
+	
+	public ArrayList<Card> getCardsInDeck(){
+		return deckCards;
+	}
+	
 }

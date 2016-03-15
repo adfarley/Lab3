@@ -6,6 +6,11 @@ public enum eHandStrength {
 		@Override
 		public String toString() {
 			return "Five of a Kind";
+		} 
+	},
+	NaturalRoyalFlush(105, "isHandNaturalRoyalFlush") {
+		public String toString(){
+			return "Natural Royal Flush";
 		}
 	},
 	RoyalFlush(100, "isHandRoyalFlush") {
