@@ -1,6 +1,8 @@
 package pokerBase;
 import java.util.ArrayList;
 import java.util.UUID;
+import pokerBase.Player;
+import pokerBase.Table;
 
 public class Game {
 
@@ -30,5 +32,9 @@ public class Game {
 	}
 	public void setGamePlayers(ArrayList<Player> gamePlayers) {
 		GamePlayers = gamePlayers;
+	}
+	public void AddPlayerToGame( Player Player, Table Table){
+		GamePlayers.add(Player);
+		
 	}
 }
