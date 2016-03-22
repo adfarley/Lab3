@@ -1342,7 +1342,7 @@ public class HandTest {
 		
 	}
 	
-/*	@Test
+	@Test
 	public void TestEvalHandFiveOfAKind(){
 		HandScore hs = new HandScore();
 		ArrayList<Card> FiveOfAKind = new ArrayList<Card>();
@@ -1355,16 +1355,19 @@ public class HandTest {
 		Hand h = new Hand();
 		h = SetHand(FiveOfAKind,h);
 		
+		try {
+			h = Hand.EvaluateHand(h);
+		} catch (HandException e) {
+			e.printStackTrace();
+			fail("TestFiveOfAKindEval failed");
+		}
+		
 		int ExpectedHandScore = eHandStrength.FiveOfAKind.getHandStrength();
-		int ActualHandScore = Hand.EvalHand(h);
+		int ActualHandScore = h.getHandScore().getHandStrength();
 		
 		assertEquals(ExpectedHandScore, ActualHandScore);
 		
-		FINISH J UNIT TESTS LATER
 		
-	}*/
-		
-		
-		//HandList.add(new Hand())
+	}
 	}
 
